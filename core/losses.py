@@ -21,37 +21,3 @@ class InfoNCELoss(nn.Module):
         pos = torch.cat([pos, pos])
         loss = -pos + torch.logsumexp(logits, dim=1)
         return loss.mean()
-
-
-class TemperatureControledNCE(nn.Module):
-    def __init__(self, temperature, device):
-        super().__init__()
-        self.t = temperature
-        self.device = device
-
-    def forward(self, zi, zj):
-        B = zi.size(0)
-        # Compute all logits
-        logits = torch.cat([zi, zj], dim=0)
-        logits = torch.mm(logits, logits.t())
-
-        p_mask1 = torch.cat([torch.zeros(B, B, device=self.device),
-                             torch.eye(B, B, device=self.device)],
-                            dim=1).bool()
-        p_mask2 = torch.cat([torch.eye(B, B, device=self.device),
-                             torch.zeros(B, B, device=self.device)],
-                            dim=1).bool()
-        p_mask = torch.cat([p_mask1, p_mask2], dim=0)
-
-        mask = (torch.ones(2 * B, device=self.device) -
-                torch.eye(2 * B, device=self.device))
-        mask = mask.bool()
-
-        negs = logits.masked_select(mask and ~p_mask).view(2 * B, 2 * B - 2)
-        pos = logits.masked_select(mask).view(2* B, 1) / self.t
-        negs = torch.cat([negs, pos])
-        loss = -pos + torch.logsumexp(negs, dim=1, keepdim=True)
-        return loss
-
-    def update_temp(self, temperature):
-        self.t = temperature
