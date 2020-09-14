@@ -1,0 +1,35 @@
+output_dir: './output/'
+fp16_precision: True
+epochs: 15
+epochs_linear: 15
+eval_every_n_epochs: 5
+optimizer: 'Adam'
+optimizer_eval: 'SGD'
+warm_up: 0
+
+optim_eval_param:
+  weight_decay: 0
+  lr: 0.1
+  nesterov: True
+  momentum: 0.9
+
+optim_parameters:
+  weight_decay: 1e-5
+  lr: 3e-4
+
+model:
+  out_dim: 128
+  backbone: "resnet18"
+
+dataset:
+  s: 0.5
+  input_shape: (32,32,3)
+  num_workers: 4
+  dataset: 'CIFAR10'
+  num_classes: 10
+  root: 'runs/datasets'
+  val_root: 'runs/datasets'
+  batch_size: 256
+
+loss:
+  temperature: 0.2
