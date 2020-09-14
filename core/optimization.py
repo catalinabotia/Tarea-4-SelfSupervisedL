@@ -55,7 +55,7 @@ class optimization():
             optimizer.zero_grad()
 
             self.logger.add_metric(loss.item(), im1.size(0) * 2)
-            # PREGUNTAR POR QUÉ multiplico el loss por el size de la imagen
+            
             self.logger.print_progress(idx)
 
         self.logger.print_progress(idx, True)
