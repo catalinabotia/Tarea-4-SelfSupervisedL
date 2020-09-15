@@ -10,7 +10,7 @@ Self-supervised learning module for the Advanced Machine Learning course at Univ
 ## Getting Started
 Clone this repository, create a new environment and run the following:
 ```
-$ conda install pytorch torchvision cudatoolkit=9.2 -c pytorch
+$ conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=9.2 -c pytorch
 ```
 To install the remaining requirements necessary to run the code:
 ```
