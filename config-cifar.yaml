@@ -1,5 +1,5 @@
 output_dir: './output/'
-fp16_precision: True
+fp16_precision: False
 epochs: 15
 epochs_linear: 15
 eval_every_n_epochs: 5

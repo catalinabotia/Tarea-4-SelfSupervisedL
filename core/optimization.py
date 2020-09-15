@@ -6,7 +6,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 # mix precision imports
-from torch.cuda.amp import GradScaler, autocast
+#from torch.cuda.amp import GradScaler, autocast
 
 # custom imports
 from core.misc import Metric_Logger
