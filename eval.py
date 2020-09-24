@@ -56,3 +56,4 @@ if __name__ == '__main__':
         f.write('Epoch: {}\nTrain acc: {}\nTest acc: {}'.format(
             top_epoch, best_train_acc, best_acc
         ))
+        
